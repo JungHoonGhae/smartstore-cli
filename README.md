@@ -53,24 +53,29 @@
 ### For Human
 
 ```bash
-# Install from source
+# macOS / Linux
+curl -fsSL https://raw.githubusercontent.com/JungHoonGhae/smartstore-cli/main/install.sh | sh
+
+# Auth helper 설치 (Python 3.10+)
+pip install -e /usr/local/share/storectl/auth-helper
+playwright install chromium
+
+# 설치 확인
+storectl version
+storectl doctor
+storectl auth login
+storectl seller info --output json
+```
+
+### From Source
+
+```bash
 git clone https://github.com/JungHoonGhae/smartstore-cli.git
 cd smartstore-cli
 make build
-
-# Install auth helper (Python 3.10+)
 pip install -e auth-helper/
 playwright install chromium
-
-# Check prerequisites
 bin/storectl doctor
-
-# Login via browser
-bin/storectl auth login
-
-# Try it
-bin/storectl seller info
-bin/storectl order list --output json
 ```
 
 ### For AI Agent
