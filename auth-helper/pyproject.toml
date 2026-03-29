@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "storectl-auth-helper"
+version = "0.1.0"
+description = "Browser-assisted login helper for storectl (Naver Smart Store CLI)"
+requires-python = ">=3.10"
+dependencies = [
+    "playwright>=1.52,<2",
+]
+
+[project.scripts]
+storectl-auth-helper = "storectl_auth_helper.cli:main"

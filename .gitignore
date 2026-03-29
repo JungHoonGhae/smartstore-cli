@@ -1,0 +1,22 @@
+/bin/
+/dist/
+/.claude/
+coverage.out
+
+# auth-helper
+auth-helper/.venv/
+auth-helper/__pycache__/
+auth-helper/*.egg-info/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+.gstack/
+auth-helper/storectl_auth_helper/__pycache__/
