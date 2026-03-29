@@ -171,11 +171,7 @@ func (s *Service) Status(ctx context.Context) (Status, error) {
 // Refresh attempts to refresh the session using existing NID cookies
 // via a headless Playwright run. This implements client.SessionRefresher.
 func (s *Service) Refresh(ctx context.Context) (*session.Session, error) {
-	result, err := s.runner.Login(ctx, LoginConfig{
-		PythonBin:        s.loginConfig.PythonBin,
-		HelperDir:        s.loginConfig.HelperDir,
-		StorageStatePath: s.loginConfig.StorageStatePath,
-	})
+	result, err := s.runner.Refresh(ctx, s.loginConfig)
 	if err != nil {
 		return nil, fmt.Errorf("session refresh failed: %w", err)
 	}

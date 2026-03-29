@@ -13,14 +13,23 @@ type LoginResult struct {
 
 type LoginRunner interface {
 	Login(ctx context.Context, cfg LoginConfig) (LoginResult, error)
+	Refresh(ctx context.Context, cfg LoginConfig) (LoginResult, error)
 }
 
 type PythonLoginRunner struct{}
 
 func (PythonLoginRunner) Login(ctx context.Context, cfg LoginConfig) (LoginResult, error) {
+	return runHelper(ctx, cfg, "login")
+}
+
+func (PythonLoginRunner) Refresh(ctx context.Context, cfg LoginConfig) (LoginResult, error) {
+	return runHelper(ctx, cfg, "refresh")
+}
+
+func runHelper(ctx context.Context, cfg LoginConfig, subcmd string) (LoginResult, error) {
 	args := []string{
 		"-m", "storectl_auth_helper",
-		"login",
+		subcmd,
 		"--storage-state", cfg.StorageStatePath,
 	}
 
@@ -29,7 +38,7 @@ func (PythonLoginRunner) Login(ctx context.Context, cfg LoginConfig) (LoginResul
 
 	output, err := cmd.CombinedOutput()
 	if err != nil {
-		return LoginResult{}, fmt.Errorf("auth helper failed: %w\nOutput: %s", err, string(output))
+		return LoginResult{}, fmt.Errorf("auth helper %s failed: %w\nOutput: %s", subcmd, err, string(output))
 	}
 
 	var result LoginResult
