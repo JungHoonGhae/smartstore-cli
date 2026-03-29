@@ -19,4 +19,5 @@ auth-helper/*.egg-info/
 .DS_Store
 Thumbs.db
 .gstack/
+openspec/
 auth-helper/storectl_auth_helper/__pycache__/
