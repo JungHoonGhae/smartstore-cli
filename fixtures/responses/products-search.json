@@ -1,0 +1,1 @@
+{"code":"BAD_REQUEST","message":"입력한 데이터가 유효하지 않습니다.","invalidInputs":[{"name":"searchOrderType","type":"NotEmpty","message":"정렬조건 항목을 입력해 주세요."}],"timestamp":"2026-03-25T16:57:14.288+00:00","needAlert":true}

@@ -1,0 +1,24 @@
+[
+  {
+    "channelNo": 1100114368,
+    "accountNo": 1100112229,
+    "representNo": 1100110443,
+    "type": "STOREFARM",
+    "channelName": "hellodev",
+    "storeExhibitionType": "SMART_STORE",
+    "url": "https://smartstore.naver.com/hellodev",
+    "accountId": "ncp_i6z811_01",
+    "defaultChannelNo": 1100114368,
+    "accountStatusType": "NORMAL",
+    "accountExternalStatusType": "NORMAL",
+    "advertiser": true,
+    "representType": "DOMESTIC_PERSONAL",
+    "roleNo": 200206319,
+    "roleGroupType": "REPRESENT",
+    "roleRangeNo": 1100110443,
+    "actionGrade": "FIFTH",
+    "serviceSatisfactionGrade": false,
+    "loginableAccountSelectVOs": [],
+    "showOption": false
+  }
+]

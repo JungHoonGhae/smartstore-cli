@@ -1,0 +1,174 @@
+[
+  {
+    "values": [
+      {
+        "code": "WAIT",
+        "availableManagerSearch": true,
+        "managerChangeableStatus": [
+          "WAIT"
+        ],
+        "sellerChangeableStatus": [
+          "WAIT"
+        ],
+        "name": "WAIT",
+        "text": "판매대기",
+        "availableSellerSearch": true,
+        "nclicksCode": ".standby"
+      },
+      {
+        "code": "SALE",
+        "availableManagerSearch": true,
+        "managerChangeableStatus": [
+          "UNADMISSION",
+          "REJECTION",
+          "SUSPENSION"
+        ],
+        "sellerChangeableStatus": [
+          "SALE",
+          "SUSPENSION"
+        ],
+        "name": "SALE",
+        "text": "판매중",
+        "availableSellerSearch": true,
+        "nclicksCode": ".selling"
+      },
+      {
+        "code": "OSTK",
+        "availableManagerSearch": true,
+        "managerChangeableStatus": [
+          "OUTOFSTOCK"
+        ],
+        "sellerChangeableStatus": [
+          "SALE",
+          "OUTOFSTOCK",
+          "SUSPENSION"
+        ],
+        "name": "OUTOFSTOCK",
+        "text": "품절",
+        "availableSellerSearch": true,
+        "nclicksCode": ".out"
+      },
+      {
+        "code": "UNADMS",
+        "availableManagerSearch": true,
+        "managerChangeableStatus": [
+          "SALE",
+          "REJECTION",
+          "SUSPENSION"
+        ],
+        "sellerChangeableStatus": [
+          "UNADMISSION"
+        ],
+        "name": "UNADMISSION",
+        "text": "승인대기",
+        "availableSellerSearch": true,
+        "nclicksCode": ".confirm"
+      },
+      {
+        "code": "REJCT",
+        "availableManagerSearch": true,
+        "managerChangeableStatus": [
+          "SALE",
+          "UNADMISSION",
+          "SUSPENSION"
+        ],
+        "sellerChangeableStatus": [
+          "REJECTION"
+        ],
+        "name": "REJECTION",
+        "text": "승인거부",
+        "availableSellerSearch": true
+      },
+      {
+        "code": "SUSP",
+        "availableManagerSearch": true,
+        "managerChangeableStatus": [
+          "SALE",
+          "UNADMISSION",
+          "REJECTION"
+        ],
+        "sellerChangeableStatus": [
+          "SALE",
+          "SUSPENSION"
+        ],
+        "name": "SUSPENSION",
+        "text": "판매중지",
+        "availableSellerSearch": true,
+        "nclicksCode": ".stop"
+      },
+      {
+        "code": "CLOSE",
+        "availableManagerSearch": true,
+        "managerChangeableStatus": [
+          "CLOSE"
+        ],
+        "sellerChangeableStatus": [
+          "CLOSE"
+        ],
+        "name": "CLOSE",
+        "text": "판매종료",
+        "availableSellerSearch": true,
+        "nclicksCode": ".end"
+      },
+      {
+        "code": "PHB",
+        "availableManagerSearch": true,
+        "managerChangeableStatus": [
+          "PROHIBITION"
+        ],
+        "sellerChangeableStatus": [
+          "PROHIBITION"
+        ],
+        "name": "PROHIBITION",
+        "text": "판매금지",
+        "availableSellerSearch": true,
+        "nclicksCode": ".ban"
+      },
+      {
+        "code": "DEL",
+        "availableManagerSearch": false,
+        "managerChangeableStatus": [
+          "DELETE"
+        ],
+        "sellerChangeableStatus": [
+          "DELETE"
+        ],
+        "name": "DELETE",
+        "text": "삭제",
+        "availableSellerSearch": false
+      }
+    ],
+    "groups": {
+      "PRODUCT_SEARCH_ALL": [
+        "WAIT",
+        "SALE",
+        "OUTOFSTOCK",
+        "UNADMISSION",
+        "REJECTION",
+        "SUSPENSION",
+        "CLOSE",
+        "PROHIBITION"
+      ],
+      "ADMIN_RENTAL_PRODUCT_SEARCH_ALL": [
+        "WAIT",
+        "SALE",
+        "OUTOFSTOCK",
+        "UNADMISSION",
+        "REJECTION",
+        "SUSPENSION",
+        "CLOSE",
+        "PROHIBITION"
+      ],
+      "PRODUCT_SEARCH_CRITERIA": [
+        "WAIT",
+        "SALE",
+        "OUTOFSTOCK",
+        "UNADMISSION",
+        "SUSPENSION",
+        "CLOSE",
+        "PROHIBITION"
+      ]
+    },
+    "enumName": "ProductStatusType"
+  }
+]
