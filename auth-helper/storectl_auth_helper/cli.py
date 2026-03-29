@@ -52,7 +52,7 @@ def run_login(args: argparse.Namespace) -> None:
     storage_state_path.parent.mkdir(parents=True, exist_ok=True)
 
     with sync_playwright() as pw:
-        browser = pw.chromium.launch(headless=args.headless)
+        browser = pw.chromium.launch(headless=args.headless, channel="chrome")
         context = browser.new_context()
         page = context.new_page()
 

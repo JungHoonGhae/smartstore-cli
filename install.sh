@@ -61,7 +61,6 @@ main() {
     echo ""
     echo "Next steps:"
     echo "  pip install -e ${SHARE_DIR}/auth-helper"
-    echo "  playwright install chromium"
     echo "  storectl doctor"
     echo "  storectl auth login"
 }

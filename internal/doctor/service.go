@@ -189,13 +189,15 @@ func (s *Service) checkPythonModule() Check {
 }
 
 func (s *Service) checkChromium() Check {
-	cmd := exec.Command(s.loginConfig.PythonBin, "-c", "from playwright.sync_api import sync_playwright; p=sync_playwright().start(); p.chromium; p.stop()")
+	// Check for system Google Chrome (channel="chrome") instead of bundled Chromium.
+	cmd := exec.Command(s.loginConfig.PythonBin, "-c",
+		"from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(channel='chrome',headless=True); b.close(); p.stop()")
 	if err := cmd.Run(); err != nil {
 		return Check{
-			Name:    "chromium_installed",
+			Name:    "chrome_installed",
 			Status:  "warning",
-			Message: "playwright chromium not installed; run: playwright install chromium",
+			Message: "Google Chrome not found; install Chrome from https://www.google.com/chrome/",
 		}
 	}
-	return Check{Name: "chromium_installed", Status: "ok"}
+	return Check{Name: "chrome_installed", Status: "ok"}
 }

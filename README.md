@@ -58,7 +58,7 @@ curl -fsSL https://raw.githubusercontent.com/JungHoonGhae/smartstore-cli/main/in
 
 # Auth helper 설치 (Python 3.10+)
 pip install -e /usr/local/share/storectl/auth-helper
-playwright install chromium
+# playwright install chromium  ← 불필요 (시스템 Chrome 사용)
 
 # 설치 확인
 storectl version
@@ -74,7 +74,7 @@ git clone https://github.com/JungHoonGhae/smartstore-cli.git
 cd smartstore-cli
 make build
 pip install -e auth-helper/
-playwright install chromium
+# playwright install chromium  ← 불필요 (시스템 Chrome 사용)
 bin/storectl doctor
 ```
 
@@ -178,7 +178,7 @@ Python 3.10+ 필요:
 
 ```bash
 pip install -e auth-helper/
-playwright install chromium
+# playwright install chromium  ← 불필요 (시스템 Chrome 사용)
 ```
 
 ### Prerequisites Check
