@@ -26,6 +26,10 @@
 > [!IMPORTANT]
 > 모든 커맨드는 **읽기 전용(read-only)** 입니다. 상품 등록/수정, 주문 상태 변경 등 쓰기 작업은 지원하지 않습니다.
 
+<p align="center">
+  <img src="docs/assets/hero.png" alt="storectl overview" width="720" />
+</p>
+
 <div align="center">
 <table>
   <tr>
