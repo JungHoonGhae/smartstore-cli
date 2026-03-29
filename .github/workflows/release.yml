@@ -1,0 +1,132 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - goos: darwin
+            goarch: arm64
+            asset: storectl-darwin-arm64
+          - goos: darwin
+            goarch: amd64
+            asset: storectl-darwin-amd64
+          - goos: windows
+            goarch: amd64
+            asset: storectl-windows-amd64
+          - goos: linux
+            goarch: amd64
+            asset: storectl-linux-amd64
+          - goos: linux
+            goarch: arm64
+            asset: storectl-linux-arm64
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+
+      - name: Build
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+          REF_NAME: ${{ github.ref_name }}
+          COMMIT_SHA: ${{ github.sha }}
+        run: |
+          mkdir -p dist/${{ matrix.asset }}
+          VERSION="${REF_NAME#v}"
+          COMMIT="${COMMIT_SHA::7}"
+          DATE="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          BINARY="storectl"
+          if [ "${{ matrix.goos }}" = "windows" ]; then
+            BINARY="storectl.exe"
+          fi
+          go build \
+            -trimpath \
+            -ldflags "-X github.com/junghoonkye/smartstore-cli/internal/version.Version=${VERSION} -X github.com/junghoonkye/smartstore-cli/internal/version.Commit=${COMMIT} -X github.com/junghoonkye/smartstore-cli/internal/version.Date=${DATE}" \
+            -o "dist/${{ matrix.asset }}/${BINARY}" \
+            ./cmd/storectl
+
+      - name: Bundle auth helper
+        run: cp -R auth-helper dist/${{ matrix.asset }}/auth-helper
+
+      - name: Package artifact
+        run: |
+          if [ "${{ matrix.goos }}" = "windows" ]; then
+            cd dist/${{ matrix.asset }} && zip -r ../${{ matrix.asset }}.zip storectl.exe auth-helper && cd ../..
+            shasum -a 256 dist/${{ matrix.asset }}.zip > dist/${{ matrix.asset }}.zip.sha256
+          else
+            tar -C dist/${{ matrix.asset }} -czf dist/${{ matrix.asset }}.tar.gz storectl auth-helper
+            shasum -a 256 dist/${{ matrix.asset }}.tar.gz > dist/${{ matrix.asset }}.tar.gz.sha256
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ matrix.asset }}
+          path: |
+            dist/${{ matrix.asset }}.tar.gz
+            dist/${{ matrix.asset }}.tar.gz.sha256
+            dist/${{ matrix.asset }}.zip
+            dist/${{ matrix.asset }}.zip.sha256
+
+  release:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v8
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Extract changelog
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          VERSION="${TAG#v}"
+          NOTES=$(awk "/^## \\[${VERSION}\\]/{flag=1; next} /^## \\[/{flag=0} flag" CHANGELOG.md 2>/dev/null || true)
+          if [ -z "$NOTES" ]; then
+            NOTES="Release ${TAG}"
+          fi
+          echo "$NOTES" > /tmp/release-notes.md
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          ASSETS=()
+          for f in dist/storectl-*.tar.gz dist/storectl-*.tar.gz.sha256 dist/storectl-*.zip dist/storectl-*.zip.sha256; do
+            [ -f "$f" ] && ASSETS+=("$f")
+          done
+
+          if gh release view "$TAG" --repo "$GH_REPO" >/dev/null 2>&1; then
+            gh release edit "$TAG" --notes-file /tmp/release-notes.md --repo "$GH_REPO"
+            gh release upload "$TAG" "${ASSETS[@]}" --clobber --repo "$GH_REPO"
+          else
+            gh release create "$TAG" "${ASSETS[@]}" --title "$TAG" --notes-file /tmp/release-notes.md --repo "$GH_REPO"
+          fi
