@@ -17,6 +17,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License" /></a>
   <a href="https://go.dev/"><img src="https://img.shields.io/badge/Go-1.25+-00ADD8.svg" alt="Go" /></a>
   <a href="https://github.com/JungHoonGhae/smartstore-cli"><img src="https://img.shields.io/badge/status-beta-orange.svg" alt="Status Beta" /></a>
+  <a href="https://github.com/JungHoonGhae/smartstore-cli/actions/workflows/ci.yml"><img src="https://github.com/JungHoonGhae/smartstore-cli/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
 </p>
 
 > [!WARNING]

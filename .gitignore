@@ -1,12 +1,18 @@
 /bin/
 /dist/
-/.claude/
+/output/
 coverage.out
 
-# auth-helper
+# Auth helper
 auth-helper/.venv/
-auth-helper/__pycache__/
+auth-helper/.pytest_cache/
+auth-helper/**/__pycache__/
 auth-helper/*.egg-info/
+*.pyc
+
+# Config & session (never commit)
+/.env
+/.env.*
 
 # IDE
 .idea/
@@ -17,7 +23,11 @@ auth-helper/*.egg-info/
 
 # OS
 .DS_Store
+**/.DS_Store
 Thumbs.db
+
+# Local dev tools
 .gstack/
 openspec/
-auth-helper/storectl_auth_helper/__pycache__/
+/.claude/
+/.emdash.json
