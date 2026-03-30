@@ -1,0 +1,57 @@
+name: Bug Report
+description: 버그를 제보합니다
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: 설명
+      description: 어떤 문제가 발생했나요?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 재현 방법
+      description: 문제를 재현할 수 있는 단계를 알려주세요.
+      placeholder: |
+        1. `storectl ...` 실행
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 기대 동작
+      description: 어떻게 동작해야 하나요?
+    validations:
+      required: false
+  - type: input
+    id: version
+    attributes:
+      label: storectl version
+      description: "`storectl version` 전체 출력을 붙여넣어 주세요."
+      placeholder: "storectl 0.1.0 commit: ... date: ... os/arch: ..."
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: OS
+      options:
+        - macOS
+        - Linux
+        - Windows
+    validations:
+      required: true
+  - type: dropdown
+    id: install_method
+    attributes:
+      label: 설치 방법
+      options:
+        - "curl | sh (설치 스크립트)"
+        - Homebrew
+        - GitHub Releases (수동 다운로드)
+        - From source (make build)
+    validations:
+      required: true
