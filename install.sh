@@ -55,12 +55,21 @@ main() {
         fi
     fi
 
+    # Install auth-helper Python package
+    echo "Installing auth helper..."
+    if command -v pip3 >/dev/null 2>&1; then
+        pip3 install -e "${SHARE_DIR}/auth-helper" --quiet 2>/dev/null || pip3 install "${SHARE_DIR}/auth-helper" --quiet 2>/dev/null || true
+    elif command -v pip >/dev/null 2>&1; then
+        pip install -e "${SHARE_DIR}/auth-helper" --quiet 2>/dev/null || pip install "${SHARE_DIR}/auth-helper" --quiet 2>/dev/null || true
+    else
+        echo "Warning: pip not found. Install auth-helper manually:"
+        echo "  pip install -e ${SHARE_DIR}/auth-helper"
+    fi
+
     echo ""
     echo "Installed $(${INSTALL_DIR}/${BINARY} version 2>/dev/null || echo "${BINARY}") to ${INSTALL_DIR}/${BINARY}"
-    echo "Auth helper installed to ${SHARE_DIR}/auth-helper"
     echo ""
     echo "Next steps:"
-    echo "  pip install -e ${SHARE_DIR}/auth-helper"
     echo "  storectl doctor"
     echo "  storectl auth login"
 }

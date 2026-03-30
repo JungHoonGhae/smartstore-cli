@@ -55,18 +55,22 @@
 
 ## Quick Start
 
-### For Human
+### For AI Agent
 
 ```bash
-# macOS / Linux
+# storectl은 AI 에이전트가 직접 실행할 수 있습니다
+storectl seller info --output json    # 구조화된 JSON 출력
+storectl product list --output csv    # CSV로 파이프 가능
+storectl stats daily --output json    # 매출 데이터 자동 수집
+```
+
+### Install
+
+```bash
+# macOS / Linux (원라인 설치)
 curl -fsSL https://raw.githubusercontent.com/JungHoonGhae/smartstore-cli/main/install.sh | sh
 
-# Auth helper 설치 (Python 3.10+)
-pip install -e /usr/local/share/storectl/auth-helper
-# playwright install chromium  ← 불필요 (시스템 Chrome 사용)
-
-# 설치 확인
-storectl version
+# 바로 사용
 storectl doctor
 storectl auth login
 storectl seller info --output json
@@ -78,18 +82,8 @@ storectl seller info --output json
 git clone https://github.com/JungHoonGhae/smartstore-cli.git
 cd smartstore-cli
 make build
-pip install -e auth-helper/
-# playwright install chromium  ← 불필요 (시스템 Chrome 사용)
+pip3 install -e auth-helper/
 bin/storectl doctor
-```
-
-### For AI Agent
-
-```bash
-# storectl은 AI 에이전트가 직접 실행할 수 있습니다
-storectl seller info --output json    # 구조화된 JSON 출력
-storectl product list --output csv    # CSV로 파이프 가능
-storectl stats daily --output json    # 매출 데이터 자동 수집
 ```
 
 ## 지원 범위
