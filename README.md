@@ -76,6 +76,16 @@ storectl auth login
 storectl seller info --output json
 ```
 
+### Windows
+
+```powershell
+# PowerShell
+Invoke-WebRequest -Uri "https://github.com/JungHoonGhae/smartstore-cli/releases/latest/download/storectl-windows-amd64.zip" -OutFile storectl.zip
+Expand-Archive storectl.zip -DestinationPath .
+pip install -e auth-helper/
+.\storectl.exe doctor
+```
+
 ### From Source
 
 ```bash
