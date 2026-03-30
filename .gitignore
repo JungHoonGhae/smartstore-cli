@@ -32,3 +32,5 @@ openspec/
 /.claude/
 /.emdash.json
 CLAUDE.md
+fixtures/responses/
+scripts/*.py

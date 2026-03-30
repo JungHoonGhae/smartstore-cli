@@ -22,7 +22,7 @@ func (c *Client) GetOrderDashboard(ctx context.Context) (domain.OrderDeliveryDas
 }
 
 // ListOrders queries the GraphQL endpoint for order status.
-// merchantNo is the pay.id from SellerInfo (e.g. "REDACTED").
+// merchantNo is the pay.id from SellerInfo.
 func (c *Client) ListOrders(ctx context.Context, merchantNo string, page, size int) (domain.OrderStatusResult, error) {
 	url := c.apiBaseURL + "/o/v3/graphql"
 
