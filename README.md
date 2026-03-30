@@ -24,7 +24,7 @@
 > 이 프로젝트는 네이버 공식 제품이 아닙니다. 웹 내부 API를 비공식적으로 사용하며, 네이버 이용약관(TOS) 위반에 해당할 수 있습니다. API는 예고 없이 변경될 수 있고, 사용으로 인한 계정 제한, 손실, 기타 불이익에 대해 개발자는 어떠한 책임도 지지 않습니다. 본인의 판단과 책임 하에 사용하세요.
 
 > [!IMPORTANT]
-> 모든 커맨드는 **읽기 전용(read-only)** 입니다. 상품 등록/수정, 주문 상태 변경 등 쓰기 작업은 지원하지 않습니다.
+> 현재 버전(v0.1.x)은 **읽기 전용(read-only)** 입니다. 상품 등록/수정, 주문 상태 변경 등 쓰기 작업은 아직 지원하지 않습니다.
 
 <p align="center">
   <img src="docs/assets/hero.png" alt="storectl overview" width="720" />
@@ -117,7 +117,7 @@ storectl stats daily --output json    # 매출 데이터 자동 수집
 | Command | Description |
 |---------|-------------|
 | `storectl version` | 버전 정보 |
-| `storectl doctor` | 시스템 건강 체크 (Python, Playwright, Chromium) |
+| `storectl doctor` | 시스템 건강 체크 (Python, Playwright, Chrome) |
 | `storectl config init\|show` | 설정 파일 관리 |
 | `storectl auth login` | 브라우저 기반 네이버 로그인 |
 | `storectl auth status` | 세션 상태 (Last Used At 포함) |
@@ -130,7 +130,7 @@ storectl stats daily --output json    # 매출 데이터 자동 수집
 ```
 User → storectl auth login
          ↓
-       Python Playwright → Opens Chromium browser
+       Python Playwright → Opens Chrome browser
          ↓
        User completes Naver ID login → Seller center
          ↓
@@ -230,7 +230,7 @@ bin/storectl doctor
 [ok] python_binary
 [ok] auth_helper_dir
 [ok] playwright_module
-[ok] chromium_installed
+[ok] chrome_installed
 ```
 
 ## Development
